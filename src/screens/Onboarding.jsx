@@ -10,13 +10,10 @@ const Onboarding = (stack) => {
              color:'black', 
              fontFamily: 'Poppins-Black',
              lineHeight: 60,
-  
-
              }}>
           Define Yourself In Your Unique Way.
         </Text>
       </View>
-
       <View style={{position: 'absolute', bottom: Platform.OS === 'ios' ? -36 : -100}}>
         <Image
           width={Platform.OS ==='ios' ? 440 : 400}
