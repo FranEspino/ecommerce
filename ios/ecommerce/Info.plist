@@ -59,5 +59,9 @@
 		<string>Poppins-Regular.ttf</string>
 		<string>Poppins-SemiBold.ttf</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Feather.ttf</string>
+	</array>
 </dict>
 </plist>
