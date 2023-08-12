@@ -1,7 +1,28 @@
 import {View, Text, TextInput, TouchableOpacity, Image, ScrollView, Platform} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 const SignUp = (stack) => {
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const signUp = async() => {
+    console.log(fullName,email,password)
+    try{
+     var response = await axios.post('http://192.168.18.3:7070/api/user/register', {
+        name: fullName,
+        username: email,
+        password: password
+      })
+
+      console.log(response)
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+
   return (
     <ScrollView style={{flex: 1, paddingHorizontal: 24, marginBottom: 24, backgroundColor:'white'}}>
       {/* Titulo Screen */}
@@ -37,6 +58,7 @@ const SignUp = (stack) => {
           placeholder="Enter your full name"
           placeholderTextColor={'#666666'}
           cursorColor="black"
+          onChangeText={(text)=>{setFullName(text)}}
           selectionColor="black"
           style={{
             backgroundColor: '#F2F2F2',
@@ -61,6 +83,7 @@ const SignUp = (stack) => {
           placeholder="Enter your email address"
           placeholderTextColor={'#666666'}
           cursorColor="black"
+          onChangeText={(text)=>{setEmail(text)}}
           keyboardType="email-address"
           selectionColor="black"
           style={{
@@ -87,6 +110,7 @@ const SignUp = (stack) => {
           placeholderTextColor={'#666666'}
           cursorColor="black"
           secureTextEntry={true}
+          onChangeText={(text)=>{setPassword(text)}}
           selectionColor="black"
           style={{
             backgroundColor: '#F2F2F2',
@@ -99,7 +123,7 @@ const SignUp = (stack) => {
       </View>
       {/* Buttom SignUp */}
       <TouchableOpacity
-        onPress={() => {stack.navigation.navigate("ButtonTabsNavigator")}}
+        onPress={() => {signUp()}}
         style={{
           backgroundColor: 'black',
           paddingVertical: 17,
