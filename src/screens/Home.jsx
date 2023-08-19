@@ -1,26 +1,39 @@
-import {View, FlatList, Text, TextInput, TouchableOpacity} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {
+  View,
+  FlatList,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
 import CardProduct from '../components/CardProduct';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/Feather';
+import { FavoritesContext } from '../context/FavoritesContext';
 
 const Home = () => {
+  const [productsoriginal, setProductsOriginal] = useState([]);
+  const [isfilterEmpty, setIsFilterEmpty] = useState(false);
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState('all');
 
+  const {state} = useContext(FavoritesContext)
+
+
   const searchProduct = (arrayProducts, text) => {
-    if(text == '') return fetchProducts();
+    if (text == '') return fetchProducts();
     var arrayBySearch = [...arrayProducts];
     arrayBySearch = arrayBySearch.filter(item => {
       return item.title.toLowerCase().includes(text.toLowerCase());
     });
-    if(arrayBySearch.length == 0) return setProducts(arrayProducts);
+    if (arrayBySearch.length == 0) return setProducts(arrayProducts);
     setProducts(arrayBySearch);
-
-  }
+  };
 
   const filterProducts = (arrayProducts, type) => {
+    setIsFilterEmpty(true);
     switch (type) {
       case 'price': {
         var arrayByPrice = [...arrayProducts];
@@ -29,36 +42,54 @@ const Home = () => {
         break;
       }
       case 'men': {
-        //TODO: category: men's clothing
+        var arrayByMen = [...arrayProducts];
+        var filterbymen = arrayByMen.filter(products => {
+          return products.category === "men's clothing";
+        });
+        setProducts(filterbymen);
+
         break;
       }
       case 'woman': {
-        //TODO: category: women's clothing
+        var arrayByWoman = [...arrayProducts];
+        var filterbywoman = arrayByWoman.filter(products => {
+          return products.category === "women's clothing";
+        });
+        setProducts(filterbywoman);
+
         break;
       }
       case 'electronics': {
-        //TODO: category: electronics
+        var arrayByElectronics = [...arrayProducts];
+        var filterbyelectronics = arrayByElectronics.filter(products => {
+          return products.category === 'electronics';
+        });
+        setProducts(filterbyelectronics);
+
         break;
       }
-  
+
       default: {
-        fetchProducts()
+        fetchProducts();
+        setIsFilterEmpty(false);
+
         break;
       }
     }
   };
 
   const fetchProducts = async () => {
-      try {
-        const response = await axios.get('https://fakestoreapi.com/products');
-        setProducts(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-  }
+    try {
+      const response = await axios.get('https://fakestoreapi.com/products');
+      setProducts(response.data);
+      setProductsOriginal(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    fetchProducts()
+    fetchProducts();
   }, []);
 
   return (
@@ -97,7 +128,9 @@ const Home = () => {
             placeholder="Search anything"
             placeholderTextColor={'#666666'}
             cursorColor="black"
-            onChangeText={(text)=>{searchProduct(products, text)}}
+            onChangeText={text => {
+              searchProduct(products, text);
+            }}
             selectionColor="black"
             keyboardType="default"
             style={{
@@ -110,7 +143,7 @@ const Home = () => {
         </View>
 
         <TouchableOpacity
-          onPress={() => filterProducts(products, 'price')}
+          onPress={() => filterProducts(productsoriginal, 'price')}
           style={{
             backgroundColor: '#000',
             width: '12%',
@@ -123,12 +156,11 @@ const Home = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={{flexDirection: 'row', justifyContent: 'space-around'}}>
+      <View style={{flexDirection: 'row', justifyContent: 'space-around', marginBottom: 16}}>
         <TouchableOpacity
           onPress={() => {
             filterProducts(products);
             setFilter('all');
-
           }}
           style={{
             backgroundColor: filter === 'all' ? '#000' : '#e9e9e9',
@@ -148,7 +180,7 @@ const Home = () => {
         <TouchableOpacity
           onPress={() => {
             setFilter('men');
-            filterProducts(products, 'men');
+            filterProducts(productsoriginal, 'men');
           }}
           style={{
             backgroundColor: filter === 'men' ? '#000' : '#e9e9e9',
@@ -166,7 +198,10 @@ const Home = () => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => setFilter('woman')}
+          onPress={() => {
+            setFilter('woman');
+            filterProducts(productsoriginal, 'woman');
+          }}
           style={{
             backgroundColor: filter === 'woman' ? '#000' : '#e9e9e9',
             borderRadius: 10,
@@ -183,7 +218,11 @@ const Home = () => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => setFilter('electronics')}
+          onPress={() => {
+            filterProducts(productsoriginal, 'electronics');
+
+            setFilter('electronics');
+          }}
           style={{
             backgroundColor: filter === 'electronics' ? '#000' : '#e9e9e9',
             borderRadius: 10,
@@ -200,23 +239,45 @@ const Home = () => {
           </Text>
         </TouchableOpacity>
       </View>
-
-      <FlatList
-        style={{padding: 10}}
-        data={products}
-        renderItem={({item}) => {
-          return (
-            <CardProduct
-              title={item.title}
-              image={item.image}
-              price={item.price}
-              rate={item.rating.rate}
+      {products.length > 0 ? (
+        <FlatList
+          style={{padding: 10}}
+          data={products}
+          renderItem={({item}) => {
+            return (
+              <CardProduct
+                title={item.title}
+                image={item.image}
+                price={item.price}
+                rate={item.rating.rate}
+                object={item}
+              />
+            );
+          }}
+          keyExtractor={item => item.id}
+          numColumns={2}
+        />
+      ) : (
+        <View
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '70%',
+          }}>
+          {isfilterEmpty ? (
+            <Text
+              style={{fontFamily: 'Poppins-Bold', fontSize: 18, color: '#000'}}>
+              No se encontro resultados
+            </Text>
+          ) : (
+            <Image
+              width={60}
+              height={60}
+              source={{uri: 'https://i.gifer.com/ZZ5H.gif'}}
             />
-          );
-        }}
-        keyExtractor={item => item.id}
-        numColumns={2}
-      />
+          )}
+        </View>
+      )}
     </View>
   );
 };

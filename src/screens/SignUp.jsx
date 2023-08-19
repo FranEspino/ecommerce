@@ -8,13 +8,14 @@ const SignUp = (stack) => {
   const [password, setPassword] = useState('');
 
   const signUp = async() => {
-    console.log(fullName,email,password)
     try{
      var response = await axios.post('http://192.168.18.3:7070/api/user/register', {
         name: fullName,
         username: email,
         password: password
       })
+
+      
 
       console.log(response)
     }catch(error){
@@ -123,7 +124,9 @@ const SignUp = (stack) => {
       </View>
       {/* Buttom SignUp */}
       <TouchableOpacity
-        onPress={() => {signUp()}}
+        onPress={() => {
+          stack.navigation.navigate('ButtonTabsNavigator')
+        }}
         style={{
           backgroundColor: 'black',
           paddingVertical: 17,

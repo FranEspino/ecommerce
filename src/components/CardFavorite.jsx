@@ -1,32 +1,20 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import Icon from 'react-native-vector-icons/Feather';
-import Icon2 from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import {FavoritesContext} from '../context/FavoritesContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from 'react-native-snackbar';
 
-const CardProduct = ({title, image, price, rate, object}) => {
-  const {state, addFavorites} = useContext(FavoritesContext);
+const CardFavorite = ({title, image, price, rate, object}) => {
+  const {state, removeFavorites} = useContext(FavoritesContext);
   const [iconsaved, setIconSaved] = useState(false);
-  useEffect(() => {
-    if (state.favorites.find(products => object.id === products.id)) {
-      setIconSaved(true);
-    }
-  }, [state.favorites]);
 
   useEffect(() => {
     const arrayFavoritesString = JSON.stringify(state.favorites);
     saveStoreData(arrayFavoritesString);
   }, [state]);
 
-  const addToFavorite = objectProduct => {
-    if (state.favorites.find(products => objectProduct.id === products.id)) {
-    } else {
-      addFavorites(objectProduct);
-    }
-  };
 
   const saveStoreData = async arrayFavorites => {
     try {
@@ -56,13 +44,10 @@ const CardProduct = ({title, image, price, rate, object}) => {
 
       <TouchableOpacity
         onPress={() => {
-          addToFavorite(object);
+          removeFavorites(object);
           setIconSaved(true)
           Snackbar.show({
-            text:
-            iconsaved 
-                ? 'El producto ya esta en favoritos'
-                : 'El producto se agrego correctamente',
+            text:"Producto eliminado.",
             duration: Snackbar.LENGTH_LONG,
           });
         }}
@@ -83,11 +68,9 @@ const CardProduct = ({title, image, price, rate, object}) => {
 
           elevation: 16,
         }}>
-        {iconsaved ? (
-          <Icon2 name="heart" size={24} color="#000" />
-        ) : (
-          <Icon name="heart" size={24} color="#000" />
-        )}
+       
+          <Icon name="backspace" size={24} color="#000" />
+        
       </TouchableOpacity>
 
       <Text
@@ -130,4 +113,4 @@ const CardProduct = ({title, image, price, rate, object}) => {
   );
 };
 
-export default CardProduct;
+export default CardFavorite;

@@ -3,14 +3,17 @@ import { SafeAreaView } from 'react-native'
 import ButtonTabsNavigator from './src/navigator/ButtonTabsNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 import NativeStackNavigator from './src/navigator/NativeStackNavigator';
+import { FavoritesProvider } from './src/context/FavoritesProvider';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <SafeAreaView style={{flex:1}} >
-        <NativeStackNavigator />
-      </SafeAreaView>
-    </NavigationContainer>
+    <FavoritesProvider>
+      <NavigationContainer>
+        <SafeAreaView style={{flex:1}} >
+          <NativeStackNavigator />
+        </SafeAreaView>
+      </NavigationContainer>
+    </FavoritesProvider>
   )
 }
 
