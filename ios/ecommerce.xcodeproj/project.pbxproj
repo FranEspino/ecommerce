@@ -13,7 +13,6 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		35D17ED49D9B48ABB0B6AA8C /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2BD61F1349D4594BBCB7B2C /* Poppins-Black.ttf */; };
-		57977ABA2A87C8C100BD07E6 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57977AB92A87C7E400BD07E6 /* Feather.ttf */; };
 		5BECB0A022E74C188095C4DF /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57AA1B0EC3A640B4935A0AB5 /* Poppins-Bold.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-ecommerce-ecommerceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-ecommerce-ecommerceTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -45,8 +44,10 @@
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-ecommerce-ecommerceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ecommerce-ecommerceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-ecommerce.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce.debug.xcconfig"; path = "Target Support Files/Pods-ecommerce/Pods-ecommerce.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-ecommerce.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce.release.xcconfig"; path = "Target Support Files/Pods-ecommerce/Pods-ecommerce.release.xcconfig"; sourceTree = "<group>"; };
+		5747AC232A9A42BE001CEB78 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
 		57977AB92A87C7E400BD07E6 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
 		57AA1B0EC3A640B4935A0AB5 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		57CF283C2A9A731F0004DF21 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-ecommerce-ecommerceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ecommerce-ecommerceTests.debug.xcconfig"; path = "Target Support Files/Pods-ecommerce-ecommerceTests/Pods-ecommerce-ecommerceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-ecommerce.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ecommerce.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = ecommerce/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -133,6 +134,8 @@
 		57977AB82A87C78600BD07E6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				57CF283C2A9A731F0004DF21 /* AntDesign.ttf */,
+				5747AC232A9A42BE001CEB78 /* Ionicons.ttf */,
 				57977AB92A87C7E400BD07E6 /* Feather.ttf */,
 			);
 			path = Fonts;
@@ -276,7 +279,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57977ABA2A87C8C100BD07E6 /* Feather.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				35D17ED49D9B48ABB0B6AA8C /* Poppins-Black.ttf in Resources */,

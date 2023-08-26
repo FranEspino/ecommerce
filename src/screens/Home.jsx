@@ -6,21 +6,17 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CardProduct from '../components/CardProduct';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Icon2 from 'react-native-vector-icons/Feather';
-import { FavoritesContext } from '../context/FavoritesContext';
 
-const Home = () => {
+const Home = (stack) => {
   const [productsoriginal, setProductsOriginal] = useState([]);
   const [isfilterEmpty, setIsFilterEmpty] = useState(false);
   const [products, setProducts] = useState([]);
   const [filter, setFilter] = useState('all');
-
-  const {state} = useContext(FavoritesContext)
-
 
   const searchProduct = (arrayProducts, text) => {
     if (text == '') return fetchProducts();
@@ -47,7 +43,6 @@ const Home = () => {
           return products.category === "men's clothing";
         });
         setProducts(filterbymen);
-
         break;
       }
       case 'woman': {
@@ -251,6 +246,7 @@ const Home = () => {
                 price={item.price}
                 rate={item.rating.rate}
                 object={item}
+                stack={stack}
               />
             );
           }}

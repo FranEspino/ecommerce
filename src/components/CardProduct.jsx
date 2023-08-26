@@ -3,11 +3,11 @@ import React, {useContext, useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 
-import {FavoritesContext} from '../context/FavoritesContext';
+import {FavoritesContext} from '../context/favoriteContext/FavoritesContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from 'react-native-snackbar';
 
-const CardProduct = ({title, image, price, rate, object}) => {
+const CardProduct = ({title, image, price, rate, object, stack}) => {
   const {state, addFavorites} = useContext(FavoritesContext);
   const [iconsaved, setIconSaved] = useState(false);
   useEffect(() => {
@@ -43,6 +43,9 @@ const CardProduct = ({title, image, price, rate, object}) => {
         backgroundColor: '#fff',
         margin: 8,
       }}>
+        <TouchableOpacity onPress={()=>{
+          stack.navigation.navigate('Detail',object)
+        }}>
       <Image
         source={{
           uri: image,
@@ -126,6 +129,7 @@ const CardProduct = ({title, image, price, rate, object}) => {
           {`⭐ ${rate}`}
         </Text>
       </View>
+      </TouchableOpacity>
     </View>
   );
 };

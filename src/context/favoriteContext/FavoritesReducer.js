@@ -3,7 +3,8 @@ export const FavoritesReducer = (state, action) => {
         case "INITIAL_FAVORITES":
             return {
                 ...state,
-                favorites: action.payload
+                favorites: action.payload,
+                currentScreen: 'home'
             }
 
         case 'ADD_FAVORITES':
@@ -17,6 +18,11 @@ export const FavoritesReducer = (state, action) => {
                 favorites: state.favorites.filter(product => {
                     return product.id !== action.payload.id;
                 })
+            }
+        case 'CHANGE_SCREEN':
+            return{
+                ...state,
+                currentScreen: action.payload
             }
         default:
             return state;

@@ -1,61 +1,86 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Home from '../screens/Home';
 import Saved from '../screens/Saved';
 const Tab = createBottomTabNavigator();
 import Icon from 'react-native-vector-icons/Feather';
+import { FavoritesContext } from '../context/favoriteContext/FavoritesContext';
+import Setting from '../screens/Setting';
+import Cart from '../screens/Cart';
+import HomeDetailStackNavigator from './HomeDetailStackNavigator';
 
 const ButtonTabsNavigator = () => {
+  const {changeScreen, state}  = useContext(FavoritesContext)  
+
   return (
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
           height: 60,
-          borderTopColor: '#CCCCCC',
-          borderWidth: 1,
-          elevation: 20
+          borderTopColor: '#fff',
         },
         headerShown: false,
         contentStyle: {backgroundColor: 'white'},
       }}>
       <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: () => <Icon name="home" size={24} color="#000" />,
-          tabBarActiveTintColor: '#000',
-          tabBarInactiveTintColor: '#000',
-          tabBarLabelStyle: {fontSize: 14, fontWeight: 'bold', color: '#000'},
+        name="HomeDetailtStackNavigator"
+        component={HomeDetailStackNavigator}
+        listeners={{
+          tabPress: e => {
+            changeScreen('home')
+          },
         }}
+        options={{
+          tabBarLabel:"Home",
+          tabBarItemStyle: {borderRadius: 25, margin:2, padding:6, backgroundColor: state.currentScreen === 'home'? '#000' : "#fff"},
+          tabBarIcon: () => <Icon name="home" size={24} color= {state.currentScreen === 'home' ? '#fff' : '#000'}  />,
+          tabBarActiveTintColor: '#e9e9e9',
+          tabBarLabelStyle: {fontSize: 14, fontWeight: 'bold', color: state.currentScreen === 'home' ? '#fff' : '#000'},
+        }}state
       />
       <Tab.Screen
         name="Saved"
         component={Saved}
+        listeners={{
+          tabPress: e => {
+            changeScreen('saved')
+          },
+        }}
         options={{
-          tabBarIcon: () => <Icon name="heart" size={24} color="#000" />,
-          tabBarActiveTintColor: '#000',
-          tabBarInactiveTintColor: '#000',
-          tabBarLabelStyle: {fontSize: 14, fontWeight: 'bold', color: '#000'},
+          tabBarItemStyle: {borderRadius: 25, margin:2, padding:6, backgroundColor: state.currentScreen === 'saved'? '#000' : "#fff"},
+
+          tabBarIcon: () => <Icon name="heart" size={24} color= {state.currentScreen === 'saved' ? '#fff' : '#000'}  />,
+          tabBarActiveTintColor: '#e9e9e9',
+          tabBarLabelStyle: {fontSize: 14, fontWeight: 'bold', color: state.currentScreen === 'saved' ? '#fff' : '#000'},
         }}
       />
       <Tab.Screen
         name="Cart"
-        component={Saved}
+        component={Cart}
+        listeners={{
+          tabPress: e => {
+            changeScreen('cart')
+          },
+        }}
         options={{
-          tabBarIcon: () => <Icon name="shopping-bag" size={24} color="#000" />,
-          tabBarActiveTintColor: '#000',
-          tabBarInactiveTintColor: '#000',
-          tabBarLabelStyle: {fontSize: 14, fontWeight: 'bold', color: '#000'},
+          tabBarItemStyle: {borderRadius: 25, margin:2, padding:6, backgroundColor: state.currentScreen === 'cart'? '#000' : "#fff"},
+          tabBarIcon: () => <Icon name="shopping-bag" size={24} color= {state.currentScreen === 'cart' ? '#fff' : '#000'}  />,
+          tabBarActiveTintColor: '#e9e9e9',
+          tabBarLabelStyle: {fontSize: 14, fontWeight: 'bold', color: state.currentScreen === 'cart' ? '#fff' : '#000'},
         }}
       />
       <Tab.Screen
         name="Settings"
-        component={Saved}
+        component={Setting}
+        listeners={{
+          tabPress: e => {
+            changeScreen('setting')
+          },
+        }}
         options={{
-          tabBarIcon: () => <Icon name="settings" size={24} color="#000" />,
-          tabBarActiveTintColor: '#000',
-          tabBarInactiveTintColor: '#000',
-          tabBarLabelStyle: {fontSize: 14, fontWeight: 'bold', color: '#000'},
+          tabBarItemStyle: {borderRadius: 25, margin:2, padding:6, backgroundColor: state.currentScreen === 'setting'? '#000' : "#fff"},
+          tabBarIcon: () => <Icon name="settings" size={24} color= {state.currentScreen === 'setting' ? '#fff' : '#000'}  />,
+          tabBarActiveTintColor: '#e9e9e9',
+          tabBarLabelStyle: {fontSize: 14, fontWeight: 'bold', color: state.currentScreen === 'setting' ? '#fff' : '#000'},
         }}
       />
     </Tab.Navigator>

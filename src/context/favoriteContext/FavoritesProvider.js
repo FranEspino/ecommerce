@@ -26,6 +26,7 @@ export const FavoritesProvider = ({children}) => {
         dispatch({type: 'ADD_FAVORITES', payload: favorite})
     }
 
+
     const removeFavorites = (favorite) => {
         dispatch({type: 'REMOVE_FAVORITES', payload: favorite})
         
@@ -34,9 +35,15 @@ export const FavoritesProvider = ({children}) => {
     const initialFavorites= (arrayFavorites) => {
         dispatch({type: 'INITIAL_FAVORITES', payload: arrayFavorites})
     }
+
+    const changeScreen = (newScreen) => {
+        dispatch({type:'CHANGE_SCREEN', payload:newScreen})
+    }
+
+
     return (
         <FavoritesContext.Provider
-         value={{state,addFavorites,removeFavorites}}>
+         value={{state,addFavorites,removeFavorites,changeScreen}}>
             {children}
         </FavoritesContext.Provider>
     )

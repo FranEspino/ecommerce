@@ -1,6 +1,6 @@
 import {View, FlatList, Image, Text} from 'react-native';
 import React, {useContext, useEffect} from 'react';
-import {FavoritesContext} from '../context/FavoritesContext';
+import {FavoritesContext} from '../context/favoriteContext/FavoritesContext';
 import CardProduct from '../components/CardProduct';
 import CardFavorites from '../components/CardFavorite';
 

@@ -2,7 +2,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import {FavoritesContext} from '../context/FavoritesContext';
+import {FavoritesContext} from '../context/favoriteContext/FavoritesContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Snackbar from 'react-native-snackbar';
 
